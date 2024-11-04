@@ -2,7 +2,11 @@ package org.example.repository;
 
 import org.example.model.StateHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface StateHistoryRepository extends JpaRepository<StateHistory, Long> {
-    // Additional query methods can be defined here if needed
+    List<StateHistory> findByTaskIdOrderByChangedAtDesc(int taskId);
 }

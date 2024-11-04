@@ -36,6 +36,10 @@ public class StateHistory {
     @Column(name = "changed_at", nullable = false, updatable = false)
     private Timestamp changedAt;
 
+    @Lob
+    @Column(name = "task_state_snapshot")
+    private String taskStateSnapshot;
+
     // Constructor with required fields
     public StateHistory(Task task, User user, Integer stateId, String changeDescription) {
         this.task = task;
@@ -44,10 +48,26 @@ public class StateHistory {
         this.changeDescription = changeDescription;
         this.changedAt = new Timestamp(System.currentTimeMillis());
     }
+    public StateHistory(Task task, User user, Integer stateId, String changeDescription, String taskStateSnapshot, Timestamp changedAt) {
+        this.task = task;
+        this.user = user;
+        this.stateId = stateId;
+        this.changeDescription = changeDescription;
+        this.taskStateSnapshot = taskStateSnapshot;
+        this.changedAt = changedAt;
+    }
+
 
     // Getter for changedAt
     public Timestamp getChangedAt() {
         return changedAt;
+    }
+    public String getTaskStateSnapshot() {
+        return taskStateSnapshot;
+    }
+
+    public void setTaskStateSnapshot(String taskStateSnapshot) {
+        this.taskStateSnapshot = taskStateSnapshot;
     }
 
     // Setter for changedAt
